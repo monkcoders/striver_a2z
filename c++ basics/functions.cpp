@@ -39,7 +39,8 @@ void doSomething(int num){
     num+=5;
 
 }
-//pass by reference 
+//pass by reference
+//arrays are always passed by reference 
 void doSomethingReference(string &s){
     s[0] = 't';
     cout<<s<<endl;
