@@ -4,6 +4,7 @@ using namespace std;
 //stores everything in sorted oerde3r and everything is unique
 //implemented using tree
 //sorted and unique
+//in set every operation is in O(logn) i.e insert, delete, search
 void explainSet(){
     set<int> st;
     st.insert(1);//{1}
