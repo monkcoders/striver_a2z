@@ -77,6 +77,7 @@ void extraExplanation(){
 
     }while(next_permutation(s.begin(), s.end()));
     cout<<endl;
+    // next_permutation in STL is a built-in function which as the name suggests returns the next lexicographically greater permutation of the elements in the container passed to it as an argument
 
 cout<<s<<" "<<s1<<endl;
 //sort string to get all permutations 
