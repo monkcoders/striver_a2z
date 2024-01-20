@@ -1,68 +1,63 @@
 #include<bits/stdc++.h>
 using namespace std;
-/*
-functions are set of code which performs something for you 
-functions are used to modularise coee functions are used to increase readability 
-functions are used to reuse same code multiple times 
-void -> does not return anything 
 
-
-*/
-void printName(){
-    cout<<"Hey abhishek\n";
-}
-
-void printNameP(string name){
-    cout<<"Hey "<<name<<"\n";
-}
-
-int sum(int num1, int num2){
-    int num3 = num1+num2;
-    return num3;
-}
-
-int maxx(int num1, int num2){
-    if(num1>=num2){
-        return num1;
+int largestElement(int arr[], int n){
+    int mx = -1;
+    for(int i =0; i<n; i++){
+        mx  = max(mx,arr[i]);
     }
-    //if nothing is returned then on calling this function will return random value
-    return num2;
+    return mx;
+}
 
+int secondLargest(int arr[], int n){
+    int first = largestElement(arr,n);
+    int second =-1;
+    for(int i =0; i<n; i++){
+        if(arr[i]!=first && second<arr[i]){
+            second= arr[i];
+        }
+    }
+    return second;
 }
-//pass by value works on the copy of passed value 
-void doSomething(int num){
-    cout<<num<<endl;
-    num+=5;
-    cout<<num<<endl;
-    num+=5;
-    cout<<num<<endl;
-    num+=5;
 
+int secondLargestAlternative(int arr[], int n){
+    int first = -1;
+    int second = -1;
+    for(int i =0; i<n; i++){
+        if(first<arr[i]){
+            second = first;
+            first =arr[i];
+
+        }else if(arr[i]!=first && second<arr[i]){
+            second = arr[i];
+        }
+    }
+    return second;
 }
-//pass by reference 
-void doSomethingReference(string &s){
-    s[0] = 't';
-    cout<<s<<endl;
-}
+
+int remove_duplicateSorted(int arr[],int n){
+       
+        int j=1;
+        for(int i =1; i<n; i++){
+            if(arr[i]!=arr[i-1]){
+                arr[j] = arr[i];
+                j++;
+            }
+        }
+        return j;
+    }
+
 int main(){
-    string name;
-    cin>>name;
-    printName();
-    printNameP(name);
-    printNameP("Anushka");
-    int num1, num2;
-    cin>>num1>>num2;
-    int num3 = sum(num1,num2);
-    cout<<num3<<endl;
-    cout<<maxx(num1,num2);
-    int num;
-    cin>>num;
-    cout<<num<<endl;
-    doSomething(num);
-    cout<<num<<endl;
-    string st = "hello";
-    cout<<st<<endl;
-    doSomethingReference(st);
-    cout<<st<<endl;
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0; i<n; i++){
+        cin>>arr[i];
+    }
+    cout<<largestElement(arr,n)<<endl;
+    cout<<secondLargest(arr,n)<<endl;
+    cout<<secondLargestAlternative(arr,n)<<endl;
+    cout<<remove_duplicateSorted(arr,n)<<endl;
+    
     return 0;
 }
