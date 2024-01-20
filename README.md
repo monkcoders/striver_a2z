@@ -24,7 +24,7 @@ returnType functionName(parameters){
 
 ## Array 
 
-### largest/smallest element in an array 
+### 1. largest/smallest element in an array 
 
 #### Bruteforce Approach (sort): T.C O(Nlogn)
 Sort the given array and return the value of last element for largest and first element for smallest. 
@@ -47,7 +47,7 @@ return largest;
 ```
 
 
-### Second Largest/Smallest element in an array
+### 2. Second Largest/Smallest element in an array
 Return the Second Largest/smallest element from an array.
 
 #### Bruteforce approach(sort): T.C O(nlog(n)+n)
@@ -84,7 +84,7 @@ for(int i =0; i<n;i++){
 return secondLargest;
 ```
 
-#### Optimised :
+#### Optimised O(N):
 Intution: If current largest is updated than previous largest becomes second largest and largest gets updated. When element smaller than largest but greater than secondLargest is encountered than only second largest is updated.  
 
 We first set largest and second largest to INT_MIN.
@@ -107,4 +107,26 @@ int secondLargest(int arr[], int n){
     }
     return second;
 }
+//O(N)
+```
+
+### 3. Check if array is sorted O(N):
+Check if the array is in non-decreasing order if yes then return true else false.
+
+Traverse array and return false for wrong order.
+
+Traverse the array from i=1 and check 
+if any a[i-1]>a[i] then return false 
+else after traversing whole array return true
+
+```cpp
+bool checkSorted(int arr[], int n){
+    for(int i=1; i<n; i++){
+        if(arr[i]<arr[i-1]){
+            return false;
+        }
+    }
+    return true;
+}
+//O(N)
 ```
