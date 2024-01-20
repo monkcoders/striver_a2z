@@ -8,7 +8,8 @@ In direct recursion, function calls itself while in indirect recursion the funct
 A solve a problem using recursion we must know solution to a smaller problem and bigger problems are solved using this small problem. 
 These small problems are the base cases which can be solved on their own.   
 
-`returnType functionName(parameters){
+```cpp
+returnType functionName(parameters){
     base_case {
         operations to be performed on base case
     }
@@ -17,7 +18,7 @@ These small problems are the base cases which can be solved on their own.
     call for smaller problem 
     functionName(smaller Parameter)
 
-}`
+}```
 
 
 ## Array 
