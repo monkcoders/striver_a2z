@@ -130,3 +130,169 @@ bool checkSorted(int arr[], int n){
 }
 //O(N)
 ```
+
+
+### 4. Remove duplicates from sorted array 
+Your are Given a sorted array containing duplicates you have to remove the duplicates from this array.
+
+#### Bruteforce (use set)t.c O(NlonN) and s.c. O(N) 
+Set is an stl in c++ that only stores unique elements. its t.c for insertion is O(logn)
+Approach: traverse the array and insert elements into a set
+          this set will be containing only unique elements. 
+          Copy this set into the array
+
+```cpp
+int removeDuplicates(vector<int> &arr, int n) {
+	set<int> s;
+	for(int i =0; i<n; i++){
+		if(s.count(arr[i])==0){
+    		s.insert(arr[i]);
+		}
+	}
+	int j=0;
+	for(auto it: s){
+		arr[j] = it;
+		j++;
+	}
+	return j;
+}
+```
+
+#### Optimized (two pointer) O(N) 
+Take two pointers i and j, where i points to the last element of the unique element array and j points to duplicate arrays first element. i.e i=0 and j=1
+Traverse the duplicate array from 1 to n and check if arr[i] !=arr[j] then increment i and put arr[j] on it.
+
+```cpp
+
+int removeDuplicates(vector<int> &arr, int n) {
+	int j=0;
+	for(int i=0; i<n-1; i++){
+		if(arr[i]==arr[i+1]){
+			continue;
+		}
+		arr[j++] = arr[i];
+	}
+	return j+1;
+}
+```
+
+### 5. Left Rotate array by one place t.c O(N) S.cO(1)
+Store first element in a temp variable and move all values of array 1 index towards right. i.e a[i-1] = a[i] and store temp at a[n-1] that is last index.
+
+
+```cpp
+
+vector<int> rotateArray(vector<int>& arr, int n) {
+    // Write your code here.
+    int temp = arr[0];
+    for(int i=1; i<n; i++){
+        arr[i-1] = arr[i];
+    }
+    arr[n-1] = temp ;
+    return arr;
+}
+
+```
+
+### 6. Right Rotate by 1
+Store last element in temp and traverse array from end till index 1 and move all elements one index ahead i.e. 
+a[i] = a[i-1] and store temp at starting index.
+
+```cpp
+
+vector<int> rotateArrayRight(vector<int>& arr, int n) {
+    // Write your code here.
+    int temp = arr[n-1];
+    for(int i=n-1; i>=1; i--){
+        arr[i] = arr[i-1];
+    }
+    arr[0] = temp ;
+    return arr;
+}
+
+```
+
+### Left rotate by k
+after n rotations Array gets back to its original form.
+therefore k = k%n;
+
+#### Bruteforce (apply left rotation by 1 k times) O(k*n)
+Left rotate by 1 the given array k times 
+Time complexity : O(k*n) 
+space complexity: O(1)
+
+```cpp
+vector<int> rotateArray(vector<int> arr, int k) {
+    int n = arr.size();
+    for (int i = 0; i < k; i++) {
+        int temp = arr[0];
+        for (int j = 0; j < n - 1; j++) {
+            arr[j] = arr[j + 1];
+        }
+        arr[n - 1] = temp;
+    }
+
+    return arr;
+}
+
+```
+
+#### Better Approach (using temp array) t.c. O(N) s.c. O(k)
+Store the first k elements in the temp array.
+Now Move other elements by k times towards left 
+Put the temp elements in the array after n-k elements 
+
+T.C. O(N)
+S.C. O(k)
+
+```cpp
+vector<int> rotateArray(vector<int> arr, int k) {
+    int n = arr.size();
+    k= k%n;
+    int temp[k];
+    //copy first k elements to temp
+    for(int i =0; i<k ; i++){
+        temp[i] = arr[i];
+    }
+    //move other elements by k positions
+    for(int i =k; i<n; i++){
+        arr[i-k] = arr[i];
+    }
+    //copy temp elements to array from n-k to n
+    for(int i=n-k; i<n; i++){
+        arr[i] =temp[i-(n-k)];
+    }
+    return arr;
+}
+
+```
+
+#### Optimized Approach (using reverse) t.c. O(n) s.c O(1)
+Reverse first k elements of array 
+Reverse remaining elements of array 
+Reverse the whole array 
+
+e.g. [1,2,3,4,5] k = 2 o/p = [3,4,5,1,2]
+reverse first k => [2,1,3,4,5]
+reverse remaining => [2,1,5,4,3]
+reverse whole array => [3,4,5,1,2] <= desired output
+
+time complexity : O(N)
+space Complexity : O(1)
+
+```cpp
+void reverse(vector<int> &arr, int s, int e){
+    while(s<e){
+        swap(arr[s],arr[e]);
+        s++;
+        e--;
+    }
+}
+
+vector<int> rotateArray(vector<int> arr, int k) {
+    reverse(arr,0,arr.size()-1);
+    reverse(arr,0,arr.size()-1-k);
+    reverse(arr,arr.size()-k, arr.size()-1);
+    return arr;
+}
+```
